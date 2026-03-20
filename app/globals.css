@@ -1,6 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Define your custom RGB variables for use with Tailwind's opacity modifiers */
+  --color-foreground-rgb: 255 255 255;
+  --color-background-start-rgb: 0 0 0;
+  --color-background-end-rgb: 0 0 0;
+}
 
 :root {
   --foreground-rgb: 255, 255, 255;
@@ -11,12 +16,16 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-start-rgb));
+  /* Ensure a clean render in Next.js 16 */
+  @apply antialiased;
 }
 
-@layer components {
-  .glass-card {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
-  }
+/* Custom Component Utilities in v4 */
+@utility glass-card {
+  background-color: oklch(1 0 0 / 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(1 0 0 / 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 /* Smooth selection color */
